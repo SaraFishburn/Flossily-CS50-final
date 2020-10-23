@@ -1,0 +1,32 @@
+{% extends "login-layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <div class="form-div">
+        <form novalidate>
+        <div class="group">      
+            <input type="text" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Email</label>
+        </div>
+        <div class="group">      
+            <input type="password" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Password</label>
+        </div> 
+        <div class="group bottom-margin-form">      
+            <input type="password" required>
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Confirm Password</label>
+        </div> 
+        <div><a class='secondary-prompts' href='/login'>Already have an account?</a></div>
+        <div class='btn-div'><button type="submit" class="btn" id='send-button'>Register</button></div>
+        </form>  
+    </div>          
+{% endblock %}

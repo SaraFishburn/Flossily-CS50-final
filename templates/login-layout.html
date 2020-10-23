@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='styling/login.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='styling/mdstyles.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='styling/mdshadows.css') }}" rel="stylesheet">
+        <title>Prep: {% block title %}{% endblock %}</title>
+    </head>
+    
+    <body>
+        <div class='sh-4 logo-div'>
+            <img class='logo' src="{{ url_for('static', filename='images/logo.svg') }}">
+        </div>
+        <div class="sh-4 container"> 
+            {% block main %}{% endblock %}
+        </div>
+        
+    </body>
+</html>
