@@ -44,7 +44,7 @@ body
 
 .logo
 { 
-    width: 150px;
+    width: 175px;
     height: auto;
     display: block;
     margin: auto;
@@ -70,15 +70,15 @@ body
     display: block;
     margin: auto;
     width: max-content;
-    margin-top: 175px;
-    
+    margin-top: 175px;  
 }
 
 /* form starting stylings ------------------------------- */
 .group 			  
 { 
   position: relative; 
-  margin-bottom: 45px; 
+  margin-top: 45px; 
+  margin-bottom: 5px;
 }
 
 input 				
@@ -156,49 +156,10 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   width: 50%;
 }
 
-.bottom-margin-form
-{
-    margin-bottom: 10px;
-}
-
 .secondary-prompts, .secondary-prompts:hover
 {
     color: var(--grey);
     opacity: 0.6;
 }
 
-.btn-div
-{
-    margin-right: 15px;
-    margin-top: 20px;
-}
 
-.btn
-{
-    width: max-content;
-    transition: opacity 0.2s;
-    background-color: var(--green);
-    color: var(--white)
-}
-
-.btn-light:focus, .btn-light:active, .btn-light:not(:disabled):not(.disabled):active:focus
-{
-    box-shadow: none;
-}
-
-.btn:hover
-{
-    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.20);
-    transform-origin: center;
-    transform: scale(1.01);
-    color: var(--white)
-    
-}
-
-.btn:active
-{
-    opacity: 0.87;
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.20);
-    transform-origin: center;
-    transform: scale(1.05);
-}

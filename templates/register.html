@@ -1,31 +1,43 @@
 {% extends "login-layout.html" %}
 
+{% block link %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='styling/register.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='javascript/register.js') }}" ></script>
+{% endblock %}
+
 {% block title %}
     Register
 {% endblock %}
 
 {% block main %}
     <div class="form-div">
-        <form novalidate>
-        <div class="group">      
-            <input type="text" required>
+        <form novalidate method="POST" action="/register" id='register-form'>
+        <div class="group">
+            <input type="text" name="email" id="email-input" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Email</label>
         </div>
+        <div class='error-message hide' id='email-error'></div>
+
         <div class="group">      
-            <input type="password" required>
+            <input type="password" name="password" id="password-input" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Password</label>
         </div> 
-        <div class="group bottom-margin-form">      
-            <input type="password" required>
+        <div class='error-message hide' id='password-error'></div>
+
+        <div class="group">      
+            <input type="password" name="confirm-password" id="confirm-input" required>
             <span class="highlight"></span>
             <span class="bar"></span>
             <label>Confirm Password</label>
         </div> 
-        <div><a class='secondary-prompts' href='/login'>Already have an account?</a></div>
+        <div class='error-message hide' id='confirm-error'></div>
+
+        <div><a class='secondary-prompts' href='/login'>Back to login</a></div>
         <div class='btn-div'><button type="submit" class="btn" id='send-button'>Register</button></div>
         </form>  
     </div>          

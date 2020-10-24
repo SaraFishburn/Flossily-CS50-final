@@ -6,20 +6,20 @@
 
 {% block main %}
     <div class="form-div">
-      <form novalidate>
+      <form novalidate method='POST' action="/login">
         <div class="group">      
-          <input type="text" required>
+          <input type="text" name='email' required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Email</label>
         </div>
         <div class="group bottom-margin-form">      
-          <input type="password" required>
+          <input type="password" name='password' required>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>Password</label>
         </div> 
-        <div><a class='secondary-prompts' href='/verify'>Forgot Password?</a></div>
+        <div><a class='secondary-prompts' href='/verify_email'>Forgot Password?</a></div>
         <div><a class='secondary-prompts' href='/register'>Don't have an account?</a></div>
         <div class='btn-div'><button type="submit" class="btn" id='send-button'>Log in</button></div>
       </form>  
