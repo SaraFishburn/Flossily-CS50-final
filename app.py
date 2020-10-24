@@ -53,8 +53,42 @@ def index():
 
 @app.route("/login")
 def login():
-    if request.method == "GET":
-        return render_template("login.html")
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        errors = []
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm = request.form,.get('confirm-password')
+        user_id = session.get(user_id)
+
+        # Ensure email was submitted
+        if not email:
+            errors.append('No email was given')
+
+        # Ensure password was submitted
+        elif not password:
+            errors.append('No password was given')
+
+        # Check email formatting
+        elif not email_format(email):
+            errors.append('Invalid email format') 
+
+        # If email exists, report error
+        if not email_exists(email):
+            errors.append('No account linked to this email')
+
+        # Retrieve hash from user
+        else:
+            user_hash = db.execute("SELECT hash FROM users WHERE user_id = :user_id",
+                                    user_id=user_id)[0].get("hash")
+                                    
+        # Check hashed user input and hash in db match
+
+
+
+
+
 
 @app.route("/logout")
 def logout():
@@ -78,46 +112,36 @@ def register():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         errors = []
+        email = request.form.get('email')
+        password = request.form.get('password')
+        confirm = request.form,.get('confirm-password')
 
-        # Ensure username was submitted
-        if not request.form.get("email"):
+        # Ensure email was submitted
+        if not email:
             errors.append('No email was given')
 
         # Ensure password was submitted
-        elif not request.form.get("password"):
+        elif not password:
             errors.append('No password was given')
 
         # Ensure password was confirmed
-        elif not request.form.get("confirm-password"):
+        elif not confirm:
             errors.append('No password confirmation was given')
 
         # Ensure password and confirm password fields match
-        elif request.form.get("password") != request.form.get("confirm-password"):
+        elif password != confirm:
             errors.append('Password and password confirmation must match')
 
+        # Check email formatting
+        elif not email_format(email):
+            errors.append('Invalid email format')
 
-        reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
-
-        # Compiling regex 
-        pat = re.compile(reg) 
-        
-        # Searching regex                  
-        mat = re.search(pat, request.form.get("password")) 
-
-        # Validating conditions 
-        if not mat: 
+        # Check password formatting
+        elif not password_format(password):
             errors.append('Invalid password')
 
-        # Check email formatting
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", request.form.get('email')):
-            errors.append('Invalid email format')
-      
-        # Query database for email and if available show error else create new row in db
-        rows = db.execute("SELECT * FROM users WHERE email = :email",
-                          email=request.form.get("email"))
-        
-        # Check email in database
-        if len(rows) != 0:
+        # Check if email exists in db
+        elif email_exists(email):
             errors.append('Email is already in use')
 
         # If there are any errors, send them to front end
@@ -126,8 +150,8 @@ def register():
 
         # Add row to db with new user information
         db.execute("INSERT INTO users (email, hash) VALUES (:email, :hash)",
-                    email=request.form.get('email'),
-                    hash=generate_password_hash(request.form.get('password')))
+                    email=email,
+                    hash=generate_password_hash(password))
         
         return redirect("/")
 
@@ -173,6 +197,46 @@ code = str(random.randrange(10000)).zfill(4)
 
 # Convert time in string format pulled from db into a time object that can have operations applied
 # ######time = datetime.strptime('''db pulled time''', '%Y-%m-%d %H-%M-%S.%f') > datetime.now()
+
+def email_format(email):
+
+    # Check email formatting
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return False
+
+    else:
+        return True
+
+def password_format(password):
+
+    # Regex for pasword format
+    reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
+
+    # Compiling regex 
+    pat = re.compile(reg) 
+    
+    # Searching regex                  
+    mat = re.search(pat, password) 
+
+    # Validating conditions 
+    if not mat: 
+        return False
+    
+    else return True
+
+def email_exists(email):
+
+        # Query database for email
+        rows = db.execute("SELECT * FROM users WHERE email = :email",
+                          email=email)
+        
+        # Check if email is in db
+        if len(rows) != 0:
+            return True
+
+        else:
+            return False
+            
 
 
 
