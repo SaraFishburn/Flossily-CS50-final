@@ -7,6 +7,7 @@ from werkzeug.exceptions import default_exceptions, HTTPException, InternalServe
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime, timedelta
 import random
+import re
 
 from helpers import login_required
 
@@ -44,7 +45,7 @@ if not config("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    return 'hello'
+    return redirect("/login")
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 # ————————————————————————————————————— Login & Out —————————————————————————————————————— #
@@ -76,37 +77,59 @@ def register():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
+        errors = []
 
         # Ensure username was submitted
         if not request.form.get("email"):
-            return redirect("/login")
+            errors.append('No email was given')
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return redirect("/login")
+            errors.append('No password was given')
 
         # Ensure password was confirmed
         elif not request.form.get("confirm-password"):
-            return redirect("/login")
+            errors.append('No password confirmation was given')
 
         # Ensure password and confirm password fields match
         elif request.form.get("password") != request.form.get("confirm-password"):
-            return redirect("/login")
+            errors.append('Password and password confirmation must match')
 
+
+        reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
+
+        # Compiling regex 
+        pat = re.compile(reg) 
+        
+        # Searching regex                  
+        mat = re.search(pat, request.form.get("password")) 
+
+        # Validating conditions 
+        if not mat: 
+            errors.append('Invalid password')
+
+        # Check email formatting
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", request.form.get('email')):
+            errors.append('Invalid email format')
+      
         # Query database for email and if available show error else create new row in db
         rows = db.execute("SELECT * FROM users WHERE email = :email",
                           email=request.form.get("email"))
         
         # Check email in database
         if len(rows) != 0:
-            return redirect("/login")
+            errors.append('Email is already in use')
+
+        # If there are any errors, send them to front end
+        if(len(errors) > 0):
+            return jsonify({"errors": errors}), 400
 
         # Add row to db with new user information
         db.execute("INSERT INTO users (email, hash) VALUES (:email, :hash)",
                     email=request.form.get('email'),
                     hash=generate_password_hash(request.form.get('password')))
         
-        return redirect("/verify_email")
+        return redirect("/")
 
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
