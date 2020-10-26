@@ -14,7 +14,7 @@
     box-sizing: border-box; 
 }
 
-/* basic stylings ------------------------------------------ */
+/* basic styles ------------------------------------------ */
 body 				 
 { 
     background: rgba(80, 145, 46, 0.6);
@@ -73,7 +73,7 @@ body
     margin-top: 175px;  
 }
 
-/* form starting stylings ------------------------------- */
+/* form starting styles ------------------------------- */
 .group 			  
 { 
   position: relative; 
@@ -160,6 +160,26 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 {
     color: var(--grey);
     opacity: 0.6;
+}
+
+.error-message
+{
+    color: var(--red);
+    font-size: 12px;
+    margin-bottom: 27px;
+    width: 300px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 

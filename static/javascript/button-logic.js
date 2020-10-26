@@ -14,3 +14,14 @@ function startLoading(id)
   button.disabled = true
   button.querySelector('#text').textContent = `${message}...`
 }
+
+function stopLoading(id)
+{
+  let button = document.getElementById(id)
+  let message = button.dataset.default
+
+  button.classList.remove('sending')
+  button.disabled = false
+  button.querySelector('#text').textContent = `${message}`
+
+}

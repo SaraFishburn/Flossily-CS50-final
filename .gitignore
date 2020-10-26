@@ -4,3 +4,4 @@ env/
 __pycache__
 test.py
 SQL-tables.txt
+password.py

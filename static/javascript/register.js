@@ -13,29 +13,32 @@ function registerAccount(e)
     emailError()
     passwordError()
     confirmError()
-
+    
     axios(
-    {
-        method: 'post',
-        url: '/register',
-        data: new FormData(e.currentTarget)
-    })
-
-    .then(function(response) 
-    {
-        window.location.href = response.request.responseURL;
-    })
-
-    .catch(function(error) 
-    {
-        let errors = error.response.data.errors
-        if(errors.includes('Email is already in use')) 
         {
-            let messageBox = document.getElementById('email-error')
-
-            messageBox.classList.remove("hide")
-        }
-    })
+            method: 'post',
+            url: '/register',
+            data: new FormData(e.currentTarget)
+        })
+        
+        .then(function(response) 
+        {
+            window.location.href = response.request.responseURL;
+        })
+        
+        .catch(function(error) 
+        {
+            let errors = error.response.data.errors
+            console.log(errors)
+            if(errors.includes('Email is already in use')) 
+            {
+                let messageBox = document.getElementById('email-error')
+                
+                messageBox.textContent = '*Email already in use'
+                messageBox.classList.remove("hide")
+            }
+        })
+        
 }
 
 function validateEmail()
@@ -100,7 +103,7 @@ function passwordError()
     else if(!validatePassword())
     {
         messageBox.classList.remove("hide")
-        messageBox.textContent = "*Password must be 8 characters long including \
+        messageBox.textContent = "*Password must be between 8 and 128 characters long including \
                                     at least 1 uppercase character, 1 lowercase \
                                     character, 1 digit, and 1 symbol."
     }
@@ -124,11 +127,13 @@ function confirmError()
     }
 }
 
-function removeErrors(elName) {
+function removeErrors(elName)
+{
     let inputEl = document.getElementById(`${elName}-input`)
     let errorEl = document.getElementById(`${elName}-error`)
   
-    inputEl.addEventListener('keydown', function(){
+    inputEl.addEventListener('keydown', function()
+    {
       errorEl.classList.add('hide')
       errorEl.textContent = ''
     })
