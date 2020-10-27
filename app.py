@@ -303,9 +303,29 @@ def verify_code():
         if datetime.strptime(expiry, '%Y-%m-%d %H-%M-%S.%f') <= datetime.now():
             errors.append('Code has expired')
 
+        # Check if code has already been attempted too many times
+        if db.execute("SELECT code_attempts FROM users WHERE email = :email",
+                                email=email)[0].get("code_attempts") = 3:
+            errors.append('Too many code attempts, send new code')
+
+
         # Check if code submitted by user matches code in db
         elif not check_password_hash(user[0].get('code_hash'), code_input):
                 errors.append('Incorrect code')
+
+                num = db.execute("SELECT code_attempts FROM users WHERE email = :email",
+                                email=email)[0].get("code_attempts") + 1
+                
+                if num == 3:
+                    errors.append('Too many code attempts, send new code')
+
+                    # Set attempts back to 0
+                    db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
+                                code_attempts=0,
+                                email=email)
+
+                    # Disable verify button and/or remove form fields and present only error and send new code button
+
 
         # If there are any errors, send them to front end
         if(len(errors) > 0):
