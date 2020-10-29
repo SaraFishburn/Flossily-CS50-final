@@ -305,8 +305,8 @@ def verify_code():
 
         # Check if code has already been attempted too many times
         if db.execute("SELECT code_attempts FROM users WHERE email = :email",
-                                email=email)[0].get("code_attempts") = 3:
-            errors.append('Too many code attempts, send new code')
+                                email=email)[0].get("code_attempts") == 3:
+            return redirect("/resend")
 
 
         # Check if code submitted by user matches code in db
@@ -317,15 +317,17 @@ def verify_code():
                                 email=email)[0].get("code_attempts") + 1
                 
                 if num == 3:
-                    errors.append('Too many code attempts, send new code')
+                    redirect("/resend")
 
                     # Set attempts back to 0
                     db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
                                 code_attempts=0,
                                 email=email)
-
-                    # Disable verify button and/or remove form fields and present only error and send new code button
-
+                
+                else:
+                    db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
+                                code_attempts=num,
+                                email=email)
 
         # If there are any errors, send them to front end
         if(len(errors) > 0):
@@ -336,6 +338,16 @@ def verify_code():
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
         return render_template("password-code.html")
+
+@app.route("/resend", methods=['GET', 'POST'])
+@email_verification_required
+def resendCode():
+    if request.method == "POST":
+        return redirect("/verify_email")
+    
+    else:
+        return render_template("send-new.html")
+
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 # ——————————————————————————————————— Reset Password ————————————————————————————————————— #

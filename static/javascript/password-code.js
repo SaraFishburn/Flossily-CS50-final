@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function()
 {
-    document.querySelector("#email-form").addEventListener("submit", verifyCode)
+    document.querySelector("#code-form").addEventListener("submit", verifyCode)
     removeErrors('code')
 })
 
