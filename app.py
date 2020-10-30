@@ -342,9 +342,11 @@ def verify_code():
 @app.route("/resend", methods=['GET', 'POST'])
 @email_verification_required
 def resendCode():
+    # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
         return redirect("/verify_email")
-    
+
+    # User reached route via GET (as by navigating to page via link/URL)
     else:
         return render_template("send-new.html")
 
@@ -356,9 +358,11 @@ def resendCode():
 @app.route("/reset_password", methods=['GET', 'POST'])
 @email_verification_required
 def reset_password():
+    # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
         return render_template("password-reset.html")
     
+    # User reached route via POST (as by submitting a form via POST)
     else:
         return redirect("/login")
 
