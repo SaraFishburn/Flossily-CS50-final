@@ -1,0 +1,24 @@
+:root {
+    --white: rgb(255, 255, 255);
+    --teal: rgb(138, 172, 167);
+    --green: rgb(80, 145, 46);
+    --gold: rgb(151, 133, 92);
+    --grey: rgb(51, 50, 54);
+    --black: rgb(26, 26, 26);
+    --red: rgb(244, 67, 54);
+    --container-background: var(--white);
+}
+
+body
+{
+    background-color: var(--grey);
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}

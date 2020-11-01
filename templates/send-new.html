@@ -13,13 +13,10 @@
     <div class='reset-prompt'>
         <p class='secondary-prompts'>Looks like you've incorrectly entered the code we sent you too many times. Please send a new code to continue.</p>
     </div>
-
-        <div><a class='secondary-prompts' href='/login'>Back to login</a></div>
-        <div class='btn-div'>
-            <button type="submit" class="btn" id='verify-button'>
-                <span id="text">Send New Code</span>
-            </button>
-        </div>
-      </form>  
-    </div>          
+    <div><a class='secondary-prompts resend-buttons' href='/login'>Back to login</a></div>
+    <form class='btn-div resend-buttons' method='POST'>
+        <button type="submit" class="btn" id='verify-button'>
+            <span id="text">Send New Code</span>
+        </button>
+    </form>         
 {% endblock %}

@@ -61,7 +61,11 @@ if not config("API_KEY"):
 @app.route("/")
 @login_required
 def index():
-    return redirect("/login")
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        return
+    else:
+        return render_template("index.html")
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 # ————————————————————————————————————— Login & Out —————————————————————————————————————— #
@@ -303,12 +307,6 @@ def verify_code():
         if datetime.strptime(expiry, '%Y-%m-%d %H-%M-%S.%f') <= datetime.now():
             errors.append('Code has expired')
 
-        # Check if code has already been attempted too many times
-        if db.execute("SELECT code_attempts FROM users WHERE email = :email",
-                                email=email)[0].get("code_attempts") == 3:
-            return redirect("/resend")
-
-
         # Check if code submitted by user matches code in db
         elif not check_password_hash(user[0].get('code_hash'), code_input):
                 errors.append('Incorrect code')
@@ -317,12 +315,14 @@ def verify_code():
                                 email=email)[0].get("code_attempts") + 1
                 
                 if num == 3:
-                    redirect("/resend")
 
                     # Set attempts back to 0
                     db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
                                 code_attempts=0,
                                 email=email)
+
+                    return redirect("/resend")
+
                 
                 else:
                     db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
@@ -338,6 +338,10 @@ def verify_code():
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
         return render_template("password-code.html")
+
+# ———————————————————————————————————————————————————————————————————————————————————————— #
+# ———————————————————————————————————— Resend Code ——————————————————————————————————————— #
+# ———————————————————————————————————————————————————————————————————————————————————————— #
 
 @app.route("/resend", methods=['GET', 'POST'])
 @email_verification_required
@@ -361,10 +365,42 @@ def reset_password():
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
         return render_template("password-reset.html")
-    
+
     # User reached route via POST (as by submitting a form via POST)
-    else:
-        return redirect("/login")
+    if request.method == "POST":
+        errors = []
+        email = session.get('email')
+        password = request.form.get('password')
+        confirm = request.form.get('confirm')
+
+        # Ensure password was submitted
+        if not password:
+            errors.append('No password was given')
+
+        if not password_format(password):
+            errors.append("Invalid password")
+
+        # Ensure password was confirmed
+        if not confirm:
+            errors.append('No password confirmation was given')
+
+        # Ensure password and confirm password fields match
+        if password != confirm:
+            errors.append('Password and password confirmation must match')
+
+        # If there are any errors, send them to front end
+        if(len(errors) > 0):
+            return jsonify({"errors": errors}), 400
+            
+        db.execute("UPDATE users SET hash = :hash WHERE email = :email",
+                    hash=generate_password_hash(password),
+                    email=email)
+            
+        return redirect('/login')
+
+# ———————————————————————————————————————————————————————————————————————————————————————— #
+# ——————————————————————————————————— Helpful Functions —————————————————————————————————— #
+# ———————————————————————————————————————————————————————————————————————————————————————— #
 
 def email_format(email):
 
@@ -405,7 +441,3 @@ def email_exists(email):
 
         else:
             return False
-
-
-
-

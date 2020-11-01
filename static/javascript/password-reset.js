@@ -1,23 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() 
 {
-    document.querySelector("#register-form").addEventListener("submit", registerAccount)
-    removeErrors('email')
+    document.querySelector("#reset-form").addEventListener("submit", resetPassword)
     removeErrors('password')
     removeErrors('confirm')
 })
 
-function registerAccount(e) 
+function resetPassword(e) 
 {
     e.preventDefault()
-
-    emailError()
+    
     passwordError()
     confirmError()
-    
+
+
     axios(
         {
             method: 'post',
-            url: '/register',
+            url: '/reset_password',
             data: new FormData(e.currentTarget)
         })
         
@@ -25,52 +24,7 @@ function registerAccount(e)
         {
             window.location.href = response.request.responseURL;
         })
-        
-        .catch(function(error) 
-        {
-            let errors = error.response.data.errors
-            if(errors.includes('Email is already in use')) 
-            {
-                let messageBox = document.getElementById('email-error')
-                
-                messageBox.textContent = '*Email already in use'
-                messageBox.classList.remove("hide")
-            }
-        })
-        
-}
-
-function validateEmail()
-{
-    let inputText = document.getElementById('email-input')
-
-    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    if(inputText.value.match(mailformat))
-    {
-        return true
-    }
-    else
-    {
-        return false
-    }
-}
-
-
-function emailError()
-{
-    let inputText = document.getElementById('email-input')
-    let messageBox = document.getElementById('email-error')
-
-    if(inputText.value.length == 0)
-    {
-        messageBox.classList.remove("hide")
-        messageBox.textContent = '*Must provide email'
-    }
-    else if(!validateEmail())
-    {
-        messageBox.classList.remove("hide")
-        messageBox.textContent = '*Invalid email format'
-    }
+        .catch(function(){})
 }
 
 function validatePassword() 
