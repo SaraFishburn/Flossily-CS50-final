@@ -23,13 +23,6 @@ FFFFFF
     box-sizing: border-box; 
 }
 
-/* basic styles ------------------------------------------ */
-body 				 
-{ 
-    background: var(--green);
-    align-items: center; 
-}
-
 .hide
 {
   display: none;
@@ -72,6 +65,26 @@ body
   background: var(--container-background);
   padding: 10px 50px 50px;
   border-radius: 20px;
+}
+
+.exit-button 
+{
+  position: absolute;
+  top:0px;
+  right:0px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.exit-cross
+{
+  width: 30px;
+  opacity: 0.67;
+}
+
+.exit-cross:hover
+{
+  opacity: 1;
 }
 
 .form-div

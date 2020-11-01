@@ -108,7 +108,7 @@
 .card
 {
     width: 30%;
-    height: 500px;
+    height: 400px;
     background-color: var(--white);
     margin-top: 100px;
     border-radius: 10px;
@@ -116,12 +116,90 @@
     align-items: center;
 }
 
-.card-photo
+.card-photo-div
 {
     width: 90%;
-    height: auto;
     border-radius: 10px;
-    transform: translateY(-50px);
+    margin-top: -50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.overlay 
+{
+    position: absolute;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 0%,  rgba(51, 50, 54, 0.67) 50%);
+}
+
+.overlay-text 
+{
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50%;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 20px;
+    align-self: flex-end;
+
+}
+
+.card-photo-div:hover .overlay 
+{
+    opacity: 1;
+}
+
+.card-photo
+{
+    width: 100%;
+    height: auto;
+    transition: transform .2s; /* Animation */
+}
+
+.card-photo-div:hover .card-photo 
+{
+    transform: scale(1.2);
+}
+
+.card-text-head
+{
+    color: var(--gold);
+    padding-top: 20px;
+    padding-left: 20px;
+    margin-bottom: 0px;
+    align-self: start;
+}
+
+.card-text-head:hover
+{
+    color: var(--gold);
+    opacity: 0.87;
+}
+
+.card-text-body
+{
+    color: var(--grey);
+    padding: 20px;
+    padding-top: 5px;
+    align-items: left;
+    max-height: 50%;
 }
 
 .attribute
@@ -139,6 +217,5 @@ a
 
 a:hover
 {
-    color: var(--teal);
-    opacity: 0.67;
+    color: rgba(138, 172, 167, 0.67);
 }
