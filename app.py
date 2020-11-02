@@ -59,7 +59,6 @@ if not config("API_KEY"):
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 
 @app.route("/")
-@login_required
 def index():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
