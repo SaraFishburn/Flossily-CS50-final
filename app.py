@@ -160,7 +160,7 @@ def login():
 
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
-        return render_template("login.html")
+        return redirect('/')
 
 
 @app.route("/logout")
