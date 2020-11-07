@@ -25,3 +25,19 @@ function stopLoading(id)
   button.querySelector('#text').textContent = `${message}`
 
 }
+
+function showPassword()
+{
+  let password = document.getElementById('password-input')
+
+  if(password.type == 'password')
+  {
+    password.type = 'text'
+  }
+  else
+  {
+    password.type = 'password'
+  }
+
+
+}
