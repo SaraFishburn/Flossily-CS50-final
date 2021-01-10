@@ -1,0 +1,41 @@
+CREATE TABLE floss (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    brand VARCHAR(50),
+    number VARCHAR(10),
+    name VARCHAR(50),
+    shade VARCHAR(15),
+    hex VARCHAR(6),
+    type VARCHAR(50),
+    discontinued INTEGER,
+    rare INTEGER
+);
+
+CREATE TABLE inventory (
+    user_id INTEGER,
+    floss_id INTEGER
+);
+
+CREATE TABLE wishlist (
+    user_id INTEGER,
+    floss_id INTEGER
+);
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email VARCHAR(320),
+    hash VARCHAR(255),
+    login_attempts INTEGER,
+    code_hash VARCHAR(255),
+    code_expiry DATETIME,
+    code_attempts INTEGER,
+    account_unlock DATETIME
+);
+
+
+data-toggle="modal" data-target="#loginModal"
+data-toggle="modal" data-target="#registerModal"
+
+<!-- {% include 'login-modal.html' %}
+{% include 'register-modal.html' %}
+{% include 'password-email-modal.html' %}
+{% include 'password-code-modal.html' %} -->

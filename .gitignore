@@ -1,7 +1,4 @@
 .env
 .vscode/
-env/
-__pycache__
-test.py
-SQL-tables.txt
+dbtables.txt
 password.py
