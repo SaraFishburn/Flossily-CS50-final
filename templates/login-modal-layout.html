@@ -1,0 +1,14 @@
+{%block modal %}
+{% endblock %}
+    <div class="sh-4 container">
+        <div class="left-color">
+            <div class="login-logo-div">
+                <img class="login-logo" src="{{ url_for('static', filename='images/logo/small_logo.svg') }}">
+            </div>
+        </div>
+        
+        {% block body %}
+        {% endblock %}
+
+    </div>
+</div>

@@ -1,26 +1,10 @@
-* 
-{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-button 
-{
-    border: none;
-}
-
-button:focus, input:focus 
-{
-    outline: none;
-}
-
 .navbar
 {
     position: fixed;
     width: 100%;
     background-color: var(--B300);
     max-height: 75px;
+    z-index: 2;
 }
 
 .navbar-link, .navbar-link:hover
@@ -112,7 +96,6 @@ button:focus, input:focus
     margin-left: 25px;
     margin-right: 25px;
 }
-
 
 .sign-button
 {

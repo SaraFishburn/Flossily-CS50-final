@@ -1,0 +1,35 @@
+{% extends "login-modal-layout.html" %}
+
+{% block modal %}
+    <div class="hide modal" id="login">
+{% endblock %}
+{% block body %}
+    <div class="form-div">
+        <form class="form" novalidate method='POST' action="/login" id='login-form'>
+            <div class="sign-in">
+                Sign In
+            </div>
+            <div>
+                <label class="label">Email
+                    <input class="input-border" type="text" name='email' id='email-input' required>
+                </label>
+            </div>
+            <div class='error-message hide' id='email-error'></div>
+            <div>      
+                <label class="label">Password
+                    <div class="input-border">
+                        <input type="password" name='password' id='password-input' required>
+                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                    </div>
+                </label>
+            </div> 
+            <div class='error-message hide' id='password-error'></div>
+
+            <div class='forgot-password'><a data-toggle="modal" data-dismiss="modal" data-target="#passwordEmail" href='#'>Forgot Password?</a></div>
+            <div class="btn-join-div"> 
+                <div class='btn-div'><button type="submit" class="btn" id='send-button'>Sign In</button></div>
+                <div class="join-div"><span class="new-user-span">New user?</span><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Join Flossily</a></div>
+            </div>
+        </form>  
+    </div>
+{% endblock %}

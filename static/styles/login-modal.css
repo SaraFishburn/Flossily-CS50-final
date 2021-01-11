@@ -1,0 +1,146 @@
+.modal 
+{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    justify-content: center;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.container
+{
+    position: relative;
+    padding: 0px;
+    background-color: var(--B50);
+    width: 55%;
+    height: 30vw;
+    display: flex;
+
+}
+
+.left-color
+{
+    background-color: var(--B300);
+    width: 25%;
+    height: 100%;    
+    display: flex;
+    align-items: center;
+}
+
+.login-logo-div
+{
+    border-radius: 50%;
+    position: relative;
+    left: 100%;
+    transform: translateX(-50%);
+    min-width: 15vw;
+    min-height: 15vw;
+    background-color: var(--B200);
+}
+
+.login-logo
+{
+    margin: 10%;
+}
+
+.form-div
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.sign-in
+{
+    opacity: 0.87;
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.form
+{
+    width: 400px;
+    margin-left: 75px;
+    margin-top: -50px;
+}
+
+.label
+{
+    font-size: 15px;
+    opacity: 0.87;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.input-border
+{
+    border: 2px solid var(--B300);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+input
+{
+    border: none;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.eyecon
+{
+    margin-right: 5px;
+    color: var(--B300);
+}
+
+.forgot-password
+{
+    margin-top: -5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgot-password a
+{
+    color: var(--B500);  
+}
+
+.btn-join-div
+{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.btn-div .btn
+{
+    background-color: var(--B300);
+    color: white;
+    border-radius: 0px;
+    padding: 5px 20px;
+}
+
+.join-div
+{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.new-user-span
+{
+    margin-right: 5px;
+}
+
+.join-link, .join-link:hover
+{
+    color: var(--B500);
+}

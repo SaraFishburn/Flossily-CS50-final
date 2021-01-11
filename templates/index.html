@@ -4,7 +4,10 @@
 
 {% block link %}
     <link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='styles/login-modal.css') }}" rel="stylesheet">
 {% endblock %}
+
+{% include 'login.html' %}
 
 {% block nav %}
     <nav class="navbar sh-4 sticky-top navbar-expand-md">
@@ -19,7 +22,7 @@
             <ul class="navbar-nav ml-auto mt-2">
                     <li class="nav-item"><a class="nav-link navbar-link" href='#'>Join Flossily</a></li>
                     <li class='nav-item nav-link navbar-link'>|</li>
-                    <li class="nav-item"><a class="nav-link navbar-link" href='#'>Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link navbar-link" data-toggle="modal" data-target="#login" href='#'>Sign In</a></li>
             </ul>
         </div>
     </nav>
@@ -35,8 +38,29 @@
             </div>
             <div class='buttons-div'>
                 <button class='sh-4 sign-join-button join-button' >Join Flossily</button>
-                <button class='sh-4 sign-join-button sign-button' >Sign In</button>
+                <button id=loginBtn class='sh-4 sign-join-button sign-button' >Sign In</button>
             </div>
         </div>
     </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("login");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("loginBtn")
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "flex";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    </script>
+
 {% endblock %}
