@@ -43,7 +43,7 @@ button:focus, input:focus
 
 .hide
 {
-  display: none;
+  visibility: hidden;
 }
 
 .sh-1 

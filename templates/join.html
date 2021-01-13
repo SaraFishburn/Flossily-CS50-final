@@ -1,0 +1,43 @@
+{% extends "login-modal-layout.html" %}
+
+{% block modal %}
+    <div class="modal" id="join" tabindex="-1" role="dialog">
+{% endblock %}
+{% block body %}
+    <div class="form-div">
+        <form class="form" novalidate method='POST' action="/join" id='join-form'>
+            <div class="sign-in">
+                Join Flossily
+            </div>
+            <div>
+                <label class="label">Email
+                    <input class="input-border" type="text" name='email' id='join-email-input' required>
+                </label>
+                <div class='error-message hide' id='join-email-error'>TODO</div>
+            </div>
+            <div>      
+                <label class="label">Password
+                    <div class="input-border">
+                        <input type="password" name='password' id='join-password-input' required>
+                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                    </div>
+                </label>
+                <div class='error-message hide' id='join-password-error'>TODO</div>
+            </div> 
+            <div>      
+                <label class="label">Confirm Password
+                    <div class="input-border">
+                        <input type="password" name='confirm' id='join-confirm-input' required>
+                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                    </div>
+                </label>
+                <div class='error-message hide' id='join-confirm-error'>TODO</div>
+            </div> 
+
+            <div class="btn-join-div"> 
+                <div class='btn-div'><button type="submit" class="btn" id='send-button'>Join</button></div>
+                <div class="join-div"><span class="new-user-span">Already have an account?</span><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Sign in</a></div>
+            </div>
+        </form>  
+    </div>
+{% endblock %} 

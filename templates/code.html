@@ -1,0 +1,30 @@
+{% extends "login-modal-layout.html" %}
+
+{% block modal %}
+    <div class="modal" id="email" tabindex="-1" role="dialog" style="display: none;">
+{% endblock %}
+{% block body %}
+    <div class="form-div">
+        <form class="form" novalidate method='POST' action="/login" id='login-form'>
+            <div class="sign-in">
+                Verification Code
+            </div>
+            <div class="email-dialogue">
+                To continue, enter the 4 digit code we sent you via email below
+            </div>
+            <div>
+                <label class="label">
+                    <input class="input-border" type="text" name='code' id='code-input' required>
+                </label>
+            </div>
+            <div class='error-message hide' id='email-error'></div>
+
+            <div class='error-message hide' id='password-error'></div>
+
+            <div class="btn-join-div"> 
+                <div class='btn-div'><button type="submit" class="btn" id='send-button'>Veify</button></div>
+                <div class="join-div"><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Back to Sign In</a></div>
+            </div>
+        </form>  
+    </div>
+{% endblock %}
