@@ -7,13 +7,26 @@ document.addEventListener('DOMContentLoaded', function()
 
     document.getElementById('join-email-input').addEventListener('blur', emailError)
     document.getElementById('join-password-input').addEventListener('blur', passwordError)
+
+    document.getElementById('join-password-eye').addEventListener('click', function(){passwordVisibility('password')})
+    document.getElementById('join-confirm-eye').addEventListener('click', function(){passwordVisibility('confirm')})
+
+    document.getElementById('join-close').addEventListener('click', function(){
+        closeModal(event)
+        {
+        if (event.target == modal)
+        {
+            login.style.display = "none";
+        }
+        }
+    })
 })
 
 function registerAccount(e) 
 {
     e.preventDefault()
 
-    // emailError()
+    mailError()
     passwordError()
     confirmError()
     
@@ -24,7 +37,7 @@ function registerAccount(e)
             data: new FormData(e.currentTarget)
         })
         
-        .then(function(response) 
+        .then(function(response)
         {
             window.location.href = response.request.responseURL;
         })
@@ -140,6 +153,26 @@ function removeErrors(elName)
       errorEl.textContent = 'todo'
     })
 }
+
+function passwordVisibility(elname)
+{
+    let eye = document.getElementById(`join-${elname}-eye`)
+    let text = document.getElementById(`join-${elname}-input`)
+
+    if(eye.textContent == "visibility_off")
+    {
+        eye.textContent = "visibility"
+        text.setAttribute("type", "text")
+    }
+    else
+    {
+        eye.textContent = "visibility_off"
+        text.setAttribute("type", "password")
+    }
+}
+
+
+
 
 
 

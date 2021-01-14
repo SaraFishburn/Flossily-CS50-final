@@ -19,7 +19,7 @@
                 <label class="label">Password
                     <div class="input-border">
                         <input type="password" name='password' id='join-password-input' required>
-                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                        <i class="material-icons eyecon" id = 'join-password-eye'> visibility_off </i>
                     </div>
                 </label>
                 <div class='error-message hide' id='join-password-error'>TODO</div>
@@ -28,7 +28,7 @@
                 <label class="label">Confirm Password
                     <div class="input-border">
                         <input type="password" name='confirm' id='join-confirm-input' required>
-                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                        <i class="material-icons eyecon" id = 'join-confirm-eye'> visibility_off </i>
                     </div>
                 </label>
                 <div class='error-message hide' id='join-confirm-error'>TODO</div>
@@ -38,6 +38,7 @@
                 <div class='btn-div'><button type="submit" class="btn" id='send-button'>Join</button></div>
                 <div class="join-div"><span class="new-user-span">Already have an account?</span><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Sign in</a></div>
             </div>
-        </form>  
+        </form> 
     </div>
+    <div><i class="material-icons close" id='join-close'>close</i></div> 
 {% endblock %} 
