@@ -1,8 +1,7 @@
 {% extends "login-modal-layout.html" %}
 
-{% block modal %}
-    <div class="modal" id="join" tabindex="-1" role="dialog">
-{% endblock %}
+{% set id = "join" %}
+
 {% block body %}
     <div class="form-div">
         <form class="form" novalidate method='POST' action="/join" id='join-form'>
@@ -19,7 +18,7 @@
                 <label class="label">Password
                     <div class="input-border">
                         <input type="password" name='password' id='join-password-input' required>
-                        <i class="material-icons eyecon" id = 'join-password-eye'> visibility_off </i>
+                        <i class="material-icons eyecon" id = 'join-password-eye'>visibility_off</i>
                     </div>
                 </label>
                 <div class='error-message hide' id='join-password-error'>TODO</div>
@@ -28,7 +27,7 @@
                 <label class="label">Confirm Password
                     <div class="input-border">
                         <input type="password" name='confirm' id='join-confirm-input' required>
-                        <i class="material-icons eyecon" id = 'join-confirm-eye'> visibility_off </i>
+                        <i class="material-icons eyecon" id = 'join-confirm-eye'>visibility_off</i>
                     </div>
                 </label>
                 <div class='error-message hide' id='join-confirm-error'>TODO</div>
@@ -40,5 +39,4 @@
             </div>
         </form> 
     </div>
-    <div><i class="material-icons close" id='join-close'>close</i></div> 
 {% endblock %} 

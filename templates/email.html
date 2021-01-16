@@ -1,11 +1,10 @@
 {% extends "login-modal-layout.html" %}
 
-{% block modal %}
-    <div class="modal" id="email" tabindex="-1" role="dialog">
-{% endblock %}
+{% set id = "email" %}
+
 {% block body %}
     <div class="form-div">
-        <form class="form" novalidate method='POST' action="/login" id='login-form'>
+        <form class="form" novalidate method='POST' action="/email" id='email-form'>
             <div class="sign-in">
                 Enter your email address
             </div>
@@ -14,12 +13,10 @@
             </div>
             <div>
                 <label class="label">
-                    <input class="input-border" type="text" name='email' id='email-input' required>
+                    <input class="input-border" type="text" name='email' id='email-email-input' required>
                 </label>
             </div>
-            <div class='error-message hide' id='email-error'></div>
-
-            <div class='error-message hide' id='password-error'></div>
+            <div class='error-message hide' id='email-email-error'></div>
 
             <div class="btn-join-div"> 
                 <div class='btn-div'><button type="submit" class="btn" id='sendBtn'>Send Code</button></div>

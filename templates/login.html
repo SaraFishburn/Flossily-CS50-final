@@ -1,8 +1,7 @@
 {% extends "login-modal-layout.html" %}
 
-{% block modal %}
-    <div class="modal" id="login" tabindex="-1" role="dialog">
-{% endblock %}
+{% set id = "login" %}
+
 {% block body %}
     <div class="form-div">
         <form class="form" novalidate method='POST' action="/login" id='login-form'>
@@ -11,18 +10,18 @@
             </div>
             <div>
                 <label class="label">Email
-                    <input class="input-border" type="text" name='email' id='email-input' required>
+                    <input class="input-border" type="text" name='email' id='login-email-input' required>
                 </label>
-                <div class='error-message hide' id='email-error'>TODO</div>
+                <div class='error-message hide' id='login-email-error'>TODO</div>
             </div>
             <div>      
                 <label class="label">Password
                     <div class="input-border">
-                        <input type="password" name='password' id='password-input' required>
-                        <i class="material-icons eyecon" id = 'eye'> visibility_off </i>
+                        <input type="password" name='password' id='login-password-input' required>
+                        <i class="material-icons eyecon" id = 'login-password-eye'> visibility_off </i>
                     </div>
                 </label>
-                <div class='error-message hide' id='password-error'>TODO</div>
+                <div class='error-message hide' id='login-password-error'>TODO</div>
             </div> 
 
             <div class='forgot-password'><a data-toggle="modal" data-target="#email" href='#'>Forgot Password?</a></div>

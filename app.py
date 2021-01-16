@@ -230,7 +230,7 @@ def join():
 # ———————————————————————————————————— Send Email ———————————————————————————————————————— #
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 
-@app.route("/verify_email", methods=['GET', 'POST'])
+@app.route("/email", methods=['GET', 'POST'])
 def verify_email():
 
     # User reached route via POST (as by submitting a form via POST)
@@ -283,7 +283,7 @@ def verify_email():
 # ———————————————————————————————————— Verify Code ——————————————————————————————————————— #
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 
-@app.route("/verify_code", methods=['GET', 'POST'])
+@app.route("/code", methods=['GET', 'POST'])
 @email_verification_required
 def verify_code():
 
@@ -353,7 +353,7 @@ def resendCode():
 # ——————————————————————————————————— Reset Password ————————————————————————————————————— #
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 
-@app.route("/reset_password", methods=['GET', 'POST'])
+@app.route("/reset", methods=['GET', 'POST'])
 @email_verification_required
 def reset_password():
     # User reached route via GET (as by navigating to page via link/URL)

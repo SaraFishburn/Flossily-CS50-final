@@ -1,11 +1,10 @@
 {% extends "login-modal-layout.html" %}
 
-{% block modal %}
-    <div class="modal" id="email" tabindex="-1" role="dialog" style="display: none;">
-{% endblock %}
+{% set id = "code" %}
+
 {% block body %}
     <div class="form-div">
-        <form class="form" novalidate method='POST' action="/login" id='login-form'>
+        <form class="form" novalidate method='POST' action="/code" id='code-form'>
             <div class="sign-in">
                 Verification Code
             </div>
@@ -14,12 +13,10 @@
             </div>
             <div>
                 <label class="label">
-                    <input class="input-border" type="text" name='code' id='code-input' required>
+                    <input class="input-border" type="text" name='code' id='code-code-input' required>
                 </label>
             </div>
-            <div class='error-message hide' id='email-error'></div>
-
-            <div class='error-message hide' id='password-error'></div>
+            <div class='error-message hide' id='code-code-error'></div>
 
             <div class="btn-join-div"> 
                 <div class='btn-div'><button type="submit" class="btn" id='send-button'>Veify</button></div>

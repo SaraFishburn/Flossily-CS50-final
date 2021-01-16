@@ -1,0 +1,36 @@
+{% extends "login-modal-layout.html" %}
+
+{% set id = "reset" %}
+
+{% block body %}
+    <div class="form-div">
+        <form class="form" novalidate method='POST' action="/reset" id='reset-form'>
+            <div class="sign-in">
+                Reset Password
+            </div>
+            <div>      
+                <label class="label">New Password
+                    <div class="input-border">
+                        <input type="password" name='password' id='reset-password-input' required>
+                        <i class="material-icons eyecon" id = 'reset-password-eye'>visibility_off</i>
+                    </div>
+                </label>
+                <div class='error-message hide' id='reset-password-error'>TODO</div>
+            </div> 
+            <div>      
+                <label class="label">Confirm New Password
+                    <div class="input-border">
+                        <input type="password" name='confirm' id='reset-confirm-input' required>
+                        <i class="material-icons eyecon" id = 'reset-confirm-eye'>visibility_off</i>
+                    </div>
+                </label>
+                <div class='error-message hide' id='reset-confirm-error'>TODO</div>
+            </div> 
+
+            <div class="btn-join-div"> 
+                <div class='btn-div'><button type="submit" class="btn" id='send-button'>Update</button></div>
+                <div class="join-div"><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Back to Sign In</a></div>
+            </div>
+        </form> 
+    </div>
+{% endblock %} 
