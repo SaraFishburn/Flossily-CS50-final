@@ -1,0 +1,19 @@
+{% extends "login-modal-layout.html" %}
+
+{% set id = "new-code" %}
+
+{% block body %}
+    <div class="form-div">
+        <form class="form" novalidate method='POST' action="/new-code" id='new-code-form' data-target-modal='code'>
+            <div class="sign-in">
+                Resend Code
+            </div>
+            <div class="label">Looks like you've incorrectly entered your verification code too many times.</div>
+            <div class="label">Please send a new code to continue.</div>
+            <div class="btn-join-div"> 
+                <div class='btn-div'><button type="submit" class="btn" id='new-code-button'>Send New Code</button></div>
+                <div class="join-div"><a class="open-login join-link" href='#'>Back to Sign In</a></div>
+            </div>
+        </form>  
+    </div>
+{% endblock %}

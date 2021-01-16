@@ -5,6 +5,7 @@
 {% block link %}
     <link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles/login-modal.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='javascript/buttonLogic.js') }}" ></script>
     <script src="{{ url_for('static', filename='javascript/inputErrorHandling.js') }}" ></script>
     <script src="{{ url_for('static', filename='javascript/modalHelper.js') }}" ></script>
 
@@ -15,6 +16,7 @@
 {% include 'email.html' %}
 {% include 'code.html' %}
 {% include 'reset.html' %}
+{% include 'new-code.html' %}
 
 {% block nav %}
     <nav class="navbar sh-4 sticky-top navbar-expand-md">
@@ -27,9 +29,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav ml-auto mt-2">
-                    <li class="nav-item"><a id="join-nav-link" class="nav-link navbar-link" href='#'>Join Flossily</a></li>
+                    <li class="nav-item"><a class="open-join nav-link navbar-link" href='#'>Join Flossily</a></li>
                     <li class='nav-item nav-link navbar-link'>|</li>
-                    <li class="nav-item"><a id="login-nav-link" class="nav-link navbar-link" href='#'>Sign In</a></li>
+                    <li class="nav-item"><a class="open-login nav-link navbar-link" href='#'>Sign In</a></li>
             </ul>
         </div>
     </nav>
@@ -44,8 +46,8 @@
                 <div class='description'>Embroidery floss organisation made easy.</div>
             </div>
             <div class='buttons-div'>
-                <button id="join-btn" class='sh-4 sign-join-button join-button' >Join Flossily</button>
-                <button id="login-btn" class='sh-4 sign-join-button sign-button' >Sign In</button>
+                <button class='open-join sh-4 sign-join-button join-button' >Join Flossily</button>
+                <button class='open-login sh-4 sign-join-button sign-button' >Sign In</button>
             </div>
         </div>
     </div>

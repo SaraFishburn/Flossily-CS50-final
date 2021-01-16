@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="form-div">
-        <form class="form" novalidate method='POST' action="/code" id='code-form'>
+        <form class="form" novalidate method='POST' action="/code" id='code-form' data-target-modal='reset'>
             <div class="sign-in">
                 Verification Code
             </div>
@@ -16,11 +16,11 @@
                     <input class="input-border" type="text" name='code' id='code-code-input' required>
                 </label>
             </div>
-            <div class='error-message hide' id='code-code-error'></div>
+            <div class='error-message hide' id='code-code-error'>TODO</div>
 
             <div class="btn-join-div"> 
-                <div class='btn-div'><button type="submit" class="btn" id='send-button'>Veify</button></div>
-                <div class="join-div"><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Back to Sign In</a></div>
+                <div class='btn-div'><button type="submit" class="btn" id='code-button' data-loading='Verifying' data-default='Verify'>Verify</button></div>
+                <div class="join-div"><a class="open-login join-link" href='#'>Back to Sign In</a></div>
             </div>
         </form>  
     </div>

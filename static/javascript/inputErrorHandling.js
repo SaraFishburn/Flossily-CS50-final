@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function()
 function activate(e, id)
 {
     e.preventDefault()
-    let emailErrors, passwordErrors, confirmErrors
+    let emailErrors, passwordErrors, confirmErrors, loadingInterval
 
     if(id === "join" || id === "login" || id === "email")
     {
@@ -30,12 +30,17 @@ function activate(e, id)
         passwordErrors = passwordError(id)
     }
     
-    if(id == "join" || id == "reset")
+    if(id === "join" || id === "reset")
     {
         confirmErrors = confirmError(id)
     }
     
     if(emailErrors || passwordErrors || confirmErrors) return
+
+    if(id === "email" || id === "code" || id === "new-code")
+    {
+        loadingInterval = startLoading(`${id}-button`)
+    }
 
     axios(
         {
@@ -45,16 +50,28 @@ function activate(e, id)
         })
         .then(function(response)
         {
-            window.location.href = response.request.responseURL
+            let targetModalId = e.target.getAttribute('data-target-modal')
+            if(!targetModalId)
+            {
+                window.location.href = response.request.responseURL
+            }
+            else
+            {
+                stopLoading(`${id}-button`, loadingInterval)
+                openModal(targetModalId)
+                resetForm(id)
+                clearAllErrors(id)
+            }
         })
         .catch(function(error) 
         {
+            if(!error.response) return
             let errors = error.response.data.errors
             
-            if(id == "join")
+            if(id === "join")
             {
 
-                if(errors.includes('Email is already in use')) 
+                if(errors?.includes('Email is already in use')) 
                 {
                     let messageBox = document.getElementById(`${id}-email-error`)
                     
@@ -62,23 +79,23 @@ function activate(e, id)
                     messageBox.classList.remove("hide")
                 }
             }
-            else if(id == "login")
+            else if(id === "login")
             {
-                if(errors.includes('Account locked'))
+                if(errors?.includes('Account locked'))
                 {
                     let messageBox = document.getElementById(`${id}-email-error`)
 
                     messageBox.textContent = '*Account currently locked, please try again later'
                     messageBox.classList.remove("hide")
                 }
-                else if(errors.includes('Too many attempts'))
+                else if(errors?.includes('Too many attempts'))
                 {
                     let messageBox = document.getElementById(`${id}-email-error`)
 
                     messageBox.textContent = '*Account has now been locked due to too many login attempts, please try again in 30 minutes'
                     messageBox.classList.remove("hide")
                 }
-                else if(errors.includes('Incorrect password'))
+                else if(errors?.includes('Incorrect password'))
                 {
                     let messageBox = document.getElementById(`${id}-password-error`)
 
@@ -86,9 +103,9 @@ function activate(e, id)
                     messageBox.classList.remove("hide")
                 }
             }
-            if(id == "login" || id == "email")
+            if(id === "login" || id == "email")
             {
-                if(errors.includes('Email does not exist')) 
+                if(errors?.includes('Email does not exist')) 
                 {
                     let messageBox = document.getElementById(`${id}-email-error`)
 
@@ -96,22 +113,31 @@ function activate(e, id)
                     messageBox.classList.remove("hide")
                 }
             }
-            else if(id == "code")
+            if(id == "email")
             {
-                if(errors.includes('Code has expired')) 
+                stopLoading(`${id}-button`, loadingInterval)
+            }
+            else if(id === "code")
+            {
+                stopLoading(`${id}-button`, loadingInterval)
+                if(errors?.includes('Code has expired')) 
                 {
                     let messageBox = document.getElementById('code-code-error')
 
                     messageBox.textContent = '*Code has expired, please send new code'
                     messageBox.classList.remove("hide")
                 }
-                else if(errors.includes('Incorrect code'))
+                else if(errors?.includes('Incorrect code'))
                 {
                     let messageBox = document.getElementById('code-code-error')
             
                     messageBox.textContent = '*Incorrect code'
                     messageBox.classList.remove("hide")
                 }
+            }
+            else if(id === "new-code")
+            {
+                stopLoading(`${id}-button`)
             }
         })
 }
@@ -216,6 +242,23 @@ function removeErrors(elName, id)
     inputEl?.addEventListener('keydown', function()
     {
       errorEl.classList.add('hide')
-      errorEl.textContent = 'todo'
+      errorEl.textContent = 'TODO'
     })
+}
+
+function clearAllErrors(id)
+{
+    let array = [
+        document.getElementById(`${id}-email-error`),
+        document.getElementById(`${id}-password-error`),
+        document.getElementById(`${id}-confirm-error`),
+        document.getElementById(`${id}-code-error`)
+    ]
+
+    for(element of array)
+    {
+        if(!element) continue
+        element.classList.add('hide')
+        element.textContent = 'TODO'
+    }
 }

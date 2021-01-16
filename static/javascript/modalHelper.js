@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() 
 {
-    let modals = [...document.getElementsByClassName(`modal`)]
+    let modals = [...document.getElementsByClassName('modal')]
+    let logins = [...document.getElementsByClassName('open-login')]
+    let joins = [...document.getElementsByClassName('open-join')]
 
     for(let modal of modals)
     {
@@ -10,14 +12,23 @@ document.addEventListener('DOMContentLoaded', function()
         document.getElementById(`${id}-password-eye`)?.addEventListener('click', function(){passwordVisibility('password', id)})
         document.getElementById(`${id}-confirm-eye`)?.addEventListener('click', function(){passwordVisibility('confirm', id)})
 
-        document.getElementById("join-btn").addEventListener('click', function(){openModal("join")})
-        document.getElementById("login-btn").addEventListener('click', function(){openModal("login")})
-        document.getElementById("join-nav-link").addEventListener('click', function(){openModal("join")})
-        document.getElementById("login-nav-link").addEventListener('click', function(){openModal("login")})
-
         document.getElementById(`${id}-close`)?.addEventListener('click', function(){closeCrossModal(id)})
         document.getElementById(id).addEventListener('click', function(e){closeClickModal(e, id)})
+
+        document.getElementById("forgot-password").addEventListener('click', function(){openModal("email", id)})
+
+        
+        for(let login of logins)
+        {
+            login.addEventListener('click', function(){openModal("login", id)})
+        }
+    
+        for(let join of joins)
+        {
+            join.addEventListener('click', function(){openModal("join", id)})
+        }
     }
+
 })
 
 function passwordVisibility(elname, id)
@@ -40,24 +51,41 @@ function passwordVisibility(elname, id)
 function closeCrossModal(id)
 {
     let modal = document.getElementById(id)
-
+    
     modal.style.display = "none"
+    resetForm(id)
+    clearAllErrors(id)
 }
 
 function closeClickModal(event, id)
 {
     let modal = document.getElementById(id)
-
+    
     if (event.target.id === "modal-contents")
     {
         modal.style.display = "none"
+        resetForm(id)
+        clearAllErrors(id)
     }
 }
 
-function openModal(modal)
+function openModal(modal, id)
 {
-    let page = document.getElementById(modal)
+    let elements = [...document.getElementsByClassName('modal')]
 
+    for(let element of elements)
+    {
+        element.style.display = "none"
+    }
+
+    let page = document.getElementById(modal)
     page.style.display = 'flex'
 
+    resetForm(id)
+    clearAllErrors(id)
+}
+
+function resetForm(id)
+{
+    document.getElementById(`${id}-form`).reset()
 }

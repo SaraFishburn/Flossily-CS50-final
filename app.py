@@ -1,6 +1,6 @@
 from decouple import config
 from cs50 import SQL
-from flask import Flask, flash, jsonify, redirect, render_template, request, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, session, Response
 from flask_session import Session
 from flask_mail import Mail, Message
 from tempfile import mkdtemp
@@ -239,7 +239,7 @@ def verify_email():
         errors = []
 
         # check email exists in db
-        if email_exists(email):
+        if email_exists(email, db):
 
             # Remember email address
             session["email"] = email
@@ -254,19 +254,24 @@ def verify_email():
             in_10_mins = datetime.now() + timedelta(minutes = 10)
             code_expiry = in_10_mins.strftime('%Y-%m-%d %H-%M-%S.%f')[:-3]
 
-            # Add code and expiry to database
-            db.execute("UPDATE users SET code_hash = :code_hash, code_expiry = :code_expiry WHERE email = :email",
+            code_attempts = 0
+
+            # Add code, expiry, and attempts to database
+            db.execute("UPDATE users SET code_hash = :code_hash, code_expiry = :code_expiry, code_attempts = :code_attempts WHERE email = :email",
                         code_hash=code_hash,
                         code_expiry=code_expiry,
+                        code_attempts=code_attempts,
                         email=email)
 
             # Send email to user with code
-            msg = Message("Prep Password Reset Code")
+            msg = Message("Flossily Password Reset Code")
             msg.add_recipient(email)
             msg.html = render_template('code-email.html', code=code)
+            print("email")
             mail.send(msg)
+            print("sent")
 
-            return redirect("/verify_code")
+            return Response(status=201)
 
         else:
             errors.append('Email does not exist')
@@ -277,7 +282,7 @@ def verify_email():
 
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
-        return render_template("password-email.html")
+        return render_template("email.html")
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 # ———————————————————————————————————— Verify Code ——————————————————————————————————————— #
@@ -309,12 +314,12 @@ def verify_code():
                                 email=email)[0].get("code_attempts") + 1
                 
                 if num == 3:
+                    print("too many attempts")
 
                     # Set attempts back to 0
                     db.execute("UPDATE users SET code_attempts = :code_attempts WHERE email = :email",
                                 code_attempts=0,
                                 email=email)
-
                     return redirect("/resend")
 
                 
@@ -327,11 +332,11 @@ def verify_code():
         if(len(errors) > 0):
             return jsonify({"errors": errors}), 400
 
-        return redirect('/reset_password')
+        return redirect('/reset')
 
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
-        return render_template("password-code.html")
+        return render_template("code.html")
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
 # ———————————————————————————————————— Resend Code ——————————————————————————————————————— #
@@ -342,11 +347,11 @@ def verify_code():
 def resendCode():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        return redirect("/verify_email")
+        return redirect("/email")
 
     # User reached route via GET (as by navigating to page via link/URL)
     else:
-        return render_template("send-new.html")
+        return render_template("new-code.html")
 
 
 # ———————————————————————————————————————————————————————————————————————————————————————— #
@@ -358,7 +363,7 @@ def resendCode():
 def reset_password():
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
-        return render_template("password-reset.html")
+        return render_template("reset.html")
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":

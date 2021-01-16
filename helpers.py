@@ -28,7 +28,7 @@ def email_verification_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("email") is None:
-            return redirect("/verify_email")
+            return redirect("/email")
         return f(*args, **kwargs)
     return decorated_function
 

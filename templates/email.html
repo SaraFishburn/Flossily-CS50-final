@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="form-div">
-        <form class="form" novalidate method='POST' action="/email" id='email-form'>
+        <form class="form" novalidate method='POST' action="/email" id='email-form' data-target-modal='code'>
             <div class="sign-in">
                 Enter your email address
             </div>
@@ -16,11 +16,11 @@
                     <input class="input-border" type="text" name='email' id='email-email-input' required>
                 </label>
             </div>
-            <div class='error-message hide' id='email-email-error'></div>
+            <div class='error-message hide' id='email-email-error'>TODO</div>
 
             <div class="btn-join-div"> 
-                <div class='btn-div'><button type="submit" class="btn" id='sendBtn'>Send Code</button></div>
-                <div class="join-div"><a class="join-link" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" href='#'>Back to Sign In</a></div>
+                <div class='btn-div'><button type="submit" class="btn" id='email-button' data-loading='Sending' data-default='Send Code'>Send Code</button></div>
+                <div class="join-div"><a class="open-login join-link" href='#'>Back to Sign In</a></div>
             </div>
         </form>  
     </div>
