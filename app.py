@@ -145,7 +145,7 @@ def login():
             return jsonify({"errors": errors}), 400
 
         # Redirect user to home page
-        return redirect("/")
+        return redirect("/inventory")
 
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
@@ -396,3 +396,17 @@ def reset_password():
                     email=email)
             
         return redirect('/login')
+
+
+
+
+
+@app.route("/inventory", methods=['GET', 'POST'])
+def home():
+    # User reached route via GET (as by navigating to page via link/URL)
+    if request.method == "GET":
+        return render_template("home.html")
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        return redirect('/')

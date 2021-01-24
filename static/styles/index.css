@@ -1,33 +1,3 @@
-.navbar
-{
-    position: fixed;
-    width: 100%;
-    background-color: var(--B300);
-    max-height: 75px;
-    z-index: 2;
-}
-
-.navbar-link, .navbar-link:hover
-{
-    color:white;
-    font-size: 20px;
-}
-
-.small-logo-circle
-{
-    background-color: var(--B200);
-    margin-top: 60px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
-
-.small-logo
-{
-    margin: 20px;
-    margin-left: 15px;
-}
-
 .floss-photo-div
 {
     position: relative;

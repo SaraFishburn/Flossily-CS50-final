@@ -1,0 +1,51 @@
+{% extends 'global.html' %}
+
+{% block nav %}
+    <nav class="navbar sh-2 sticky-top navbar-expand-md layout-navbar">
+        <div class="large-logo-div">
+            <img class="nav-logo large-nav-logo" src="{{ url_for('static', filename='images/logo/large_logo.svg') }}">
+        </div>
+        
+        <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto mt-2">
+                    <li class="nav-item"><a class="open-login nav-link navbar-link" href='#'>Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block body %}
+    <!-- background -->
+    <div class="background-div">
+        <!-- menu -->
+        <div class="sh-2 menu-div">
+            <div>My Inventory</div>
+            <div>My Inventory</div>
+            <div>
+                <div>My Inventory</div>
+            </div>
+
+        </div>
+        <!-- container -->
+        <div class="content-div">
+            <!-- search and filter -->
+            <div class="search-filter-div">
+                <div class="search-div">
+                    <input class="search-input" type="text" maxlength="25" name='search' id='search-input' placeholder='Find Floss'>
+                    <i class="material-icons search-icon" id = 'search-icon'> search </i>
+                </div>
+                <div class='sort-filter'>
+                    <i class="material-icons search-icon" id = 'search-icon'> sort </i>
+                    <i class="material-icons search-icon" id = 'search-icon'> filter_alt </i>
+                </div>
+            </div>
+            <!-- list -->
+        </div>
+
+    </div>
+
+{% endblock %}
