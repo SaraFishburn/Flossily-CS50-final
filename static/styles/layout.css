@@ -60,6 +60,87 @@
     height: 100vh;
 }
 
+.menu-options
+{
+    margin-top: 70px;
+    padding: 20px;
+}
+
+.menu-icons
+{
+    height: 24px;
+    margin-right: 10px;
+}
+
+.floss-icon
+{
+    opacity: 0.87;
+}
+
+.menu-collapse
+{
+    position: absolute;
+    right: 0px;
+    transform: rotate(-90deg)
+}
+
+.rotate-collapse
+{
+    transform: rotate(0deg);
+}
+
+.main-option
+{
+    opacity: 0.87;
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.anchor-div
+{
+    display: flex;
+    align-items: center;
+}
+
+.floss-range-div
+{
+    margin-bottom: 0px;
+}
+
+.secondary-option
+{
+    opacity: 0.8;
+    font-size: 22px;
+    padding-left: 48px;
+    position: relative;
+    cursor: pointer;
+}
+
+.tertiary-option
+{
+    opacity: 0.75;
+    font-size: 20px;
+    padding-left: 72px;
+    cursor: pointer;
+}
+
+.hover:hover
+{
+    background-color: var(--B50);
+}
+
+.hover:focus
+{
+    background-color: var(--B50);
+    color: var(--B500);
+    fill: var(--B500);
+}
+
 .content-div
 {
     flex-grow: 1;
@@ -105,4 +186,5 @@
     margin-top: 2px;
     margin-right: 1px;
     color: var(--B200);
+    cursor: pointer;
 }

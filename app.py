@@ -397,11 +397,12 @@ def reset_password():
             
         return redirect('/login')
 
-
-
-
+# ———————————————————————————————————————————————————————————————————————————————————————— #
+# —————————————————————————————————————— Inventory ——————————————————————————————————————— #
+# ———————————————————————————————————————————————————————————————————————————————————————— #
 
 @app.route("/inventory", methods=['GET', 'POST'])
+@login_required
 def home():
     # User reached route via GET (as by navigating to page via link/URL)
     if request.method == "GET":
